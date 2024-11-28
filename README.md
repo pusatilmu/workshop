@@ -53,7 +53,7 @@ Berikut adalah fitur-fitur utama dari aplikasi ini:
 ## Instalasi
 
 ### 1. **Persyaratan Sistem**
-   - Pastikan Anda sudah menginstal [XAMPP](https://www.apachefriends.org/downloads) dan [Git](https://git-scm.com/downloads) pada sistem Anda.
+   - Pastikan Anda sudah menginstal [XAMPP](https://www.apachefriends.org/download.html) dan [Git](https://git-scm.com/downloads) pada sistem Anda.
    - Aplikasi ini memerlukan server lokal (misalnya, menggunakan PHP built-in server) untuk dijalankan.
 
 ### 2. **Menyalin (Clone) Repositori**
