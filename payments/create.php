@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <!-- Form to add a new payment -->
   <form action="create.php" method="POST">
     <div>
-      <label for="repair_id">Repair ID</label>
+      <label for="repair_id">Repair</label>
       <select name="repair_id" id="repair_id" required>
-        <option value="">Select Repair ID</option>
+        <option value="">Select Repair</option>
         <?php
         // Fetch existing repair IDs from the repairs table
         $sql = "SELECT id, description FROM repairs"; // Assuming you have a repairs table with an id and description
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result->num_rows > 0) {
           // Loop through the repair records and display them in the dropdown
           while ($row = $result->fetch_assoc()) {
-            echo "<option value='" . $row['id'] . "'>" . $row['id'] . " - " . $row['description'] . "</option>";
+            echo "<option value='" . $row['id'] . "'>"  . $row['description'] . "</option>";
           }
         } else {
           echo "<option value=''>No repairs available</option>";
