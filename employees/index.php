@@ -16,7 +16,7 @@ $result = $conn->query($sql);
 
 <body>
   <h1>Employees List</h1>
-  <a href="create.php">Add New Employee</a><br><br>
+  <a href="create.php">Add New Employee</a>
 
   <table border="1">
     <thead>
