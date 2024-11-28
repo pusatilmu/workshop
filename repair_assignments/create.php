@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Insert the repair assignment into the database
   $sql = "INSERT INTO repair_assignments (repair_id, employee_id) 
-          VALUES ('$repair_id', '$employee_id')";
+            VALUES ('$repair_id', '$employee_id')";
 
   if ($conn->query($sql) === TRUE) {
     header("Location: index.php"); // Redirect to index page after successful insertion
@@ -34,18 +34,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <form action="create.php" method="POST">
 
     <div>
-      <label for="repair_id">Repair ID</label>
+      <label for="repair_id">Repair</label>
       <select name="repair_id" id="repair_id" required>
-        <option value="">Select Repair ID</option>
+        <option value="">Select Repair</option>
         <?php
-        // Fetch available repairs to display in the dropdown
-        $sql = "SELECT id, description FROM repairs"; // Assuming you have a repairs table
+        // Fetch available repairs to display in the dropdown, excluding the selected ones
+        $sql = "SELECT id, repair_type FROM repairs"; // Assuming you have a repairs table
         $result = $conn->query($sql);
 
         // Populate the dropdown with repairs from the database
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
-            echo "<option value='" . $row['id'] . "'>" . $row['id'] . " - " . $row['description'] . "</option>";
+            // Display each repair, but ensure the selected repair doesn't appear again
+            echo "<option value='" . $row['id'] . "'>" . $row['repair_type'] . "</option>";
           }
         } else {
           echo "<option value=''>No repairs available</option>";
@@ -55,9 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <div>
-      <label for="employee_id">Employee ID</label>
+      <label for="employee_id">Employee</label>
       <select name="employee_id" id="employee_id" required>
-        <option value="">Select Employee ID</option>
+        <option value="">Select Employee</option>
         <?php
         // Fetch available employees to display in the dropdown
         $sql = "SELECT id, first_name, last_name FROM employees"; // Assuming you have an employees table
@@ -66,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Populate the dropdown with employees from the database
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
-            echo "<option value='" . $row['id'] . "'>" . $row['id'] . " - " . $row['first_name'] . " " . $row['last_name'] . "</option>";
+            echo "<option value='" . $row['id'] . "'>" .  $row['first_name'] . " " . $row['last_name'] . "</option>";
           }
         } else {
           echo "<option value=''>No employees available</option>";
