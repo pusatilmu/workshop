@@ -11,12 +11,12 @@
   <h1>Workshop Management</h1>
   <ul>
     <li><a href="customers/index.php">Customers</a></li>
+    <li><a href="vehicles/index.php">Vehicles</a></li>
     <li><a href="employees/index.php">Employees</a></li>
-    <li><a href="payments/index.php">Payments</a></li>
     <li><a href="repairs/index.php">Repairs</a></li>
     <li><a href="repair_items/index.php">Repair Items</a></li>
     <li><a href="repair_assignments/index.php">Repair Assignments</a></li>
-    <li><a href="vehicles/index.php">Vehicles</a></li>
+    <li><a href="payments/index.php">Payments</a></li>
   </ul>
 </body>
 
