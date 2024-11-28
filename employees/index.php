@@ -15,9 +15,10 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-  <h1>Employees List</h1>
-  <a href="create.php">Add New Employee</a>
-
+  <div>
+    <h1>Employees List</h1>
+    <a href="create.php">Add New Employee</a>
+  </div>
   <table border="1">
     <thead>
       <tr>
