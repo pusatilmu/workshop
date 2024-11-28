@@ -1,8 +1,10 @@
 <?php
 include('../config/database.php');
 
-// Fetch all vehicles
-$sql = "SELECT * FROM vehicles";
+// Fetch all vehicles along with customer details
+$sql = "SELECT vehicles.*, customers.first_name, customers.last_name 
+        FROM vehicles
+        JOIN customers ON vehicles.customer_id = customers.id";
 $result = $conn->query($sql);
 ?>
 
@@ -24,7 +26,7 @@ $result = $conn->query($sql);
     <thead>
       <tr>
         <th>ID</th>
-        <th>Customer ID</th>
+        <th>Customer Name</th> <!-- Displaying Customer Name instead of Customer ID -->
         <th>Vehicle Type</th>
         <th>Brand</th>
         <th>Model</th>
@@ -38,7 +40,7 @@ $result = $conn->query($sql);
       <?php while ($row = $result->fetch_assoc()) { ?>
         <tr>
           <td><?php echo $row['id']; ?></td>
-          <td><?php echo $row['customer_id']; ?></td>
+          <td><?php echo $row['first_name'] . ' ' . $row['last_name']; ?></td> <!-- Display customer name -->
           <td><?php echo $row['vehicle_type']; ?></td>
           <td><?php echo $row['brand']; ?></td>
           <td><?php echo $row['model']; ?></td>
