@@ -21,10 +21,10 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-  <h1>Payments List</h1>
-
-  <a href="create.php">Add New Payment</a>
-
+  <div>
+    <h1>Payments List</h1>
+    <a href="create.php">Add New Payment</a>
+  </div>
   <table border="1">
     <thead>
       <tr>
