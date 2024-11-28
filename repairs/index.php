@@ -1,12 +1,11 @@
 <?php
 include('../config/database.php');
 
-// Menampilkan data payments dengan relasi ke repairs, vehicles, dan customers
-$sql = "SELECT payments.id, payments.amount, payments.payment_date, 
-                repairs.repair_type, repairs.status, 
+// Fetch repairs data along with related vehicles and customers
+$sql = "SELECT repairs.id, repairs.repair_type, repairs.description, repairs.status, repairs.start_date, repairs.end_date, 
+                vehicles.id AS vehicle_id, vehicles.vehicle_type, vehicles.brand, vehicles.model, vehicles.license_plate, vehicles.year,
                 customers.first_name, customers.last_name, customers.email 
-        FROM payments
-        JOIN repairs ON payments.repair_id = repairs.id
+        FROM repairs
         JOIN vehicles ON repairs.vehicle_id = vehicles.id
         JOIN customers ON vehicles.customer_id = customers.id";
 $result = $conn->query($sql);
@@ -18,6 +17,15 @@ $result = $conn->query($sql);
 <head>
   <meta charset="UTF-8">
   <title>Repairs List</title>
+  <script>
+    // Function to toggle the "Select All" checkbox
+    function toggleSelectAll(source) {
+      var checkboxes = document.querySelectorAll('.repair-checkbox');
+      checkboxes.forEach(function(checkbox) {
+        checkbox.checked = source.checked;
+      });
+    }
+  </script>
 </head>
 
 <body>
@@ -26,35 +34,48 @@ $result = $conn->query($sql);
 
     <a href="create.php">Add New Repair</a><br><br>
   </div>
-  <table border="1">
-    <thead>
-      <tr>
-        <th>Repair Type</th>
-        <th>Repair Status</th>
-        <th>Amount</th>
-        <th>Payment Date</th>
-        <th>Customer Name</th>
-        <th>Customer Email</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php while ($row = $result->fetch_assoc()) { ?>
+
+  <!-- Form to handle batch deletion -->
+  <form action="delete_selected.php" method="POST">
+    <table border="1">
+      <thead>
         <tr>
-          <td><?php echo $row['repair_type']; ?></td>
-          <td><?php echo $row['status']; ?></td>
-          <td><?php echo $row['amount']; ?></td>
-          <td><?php echo $row['payment_date']; ?></td>
-          <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
-          <td><?php echo $row['email']; ?></td>
-          <td>
-            <a href="update.php?id=<?php echo $row['id']; ?>">Edit</a> |
-            <a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
-          </td>
+          <th><input type="checkbox" onclick="toggleSelectAll(this)"></th>
+          <th>Repair Type</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Vehicle</th>
+          <th>Customer Name</th>
+          <th>Customer Email</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Actions</th>
         </tr>
-      <?php } ?>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <?php while ($row = $result->fetch_assoc()) { ?>
+          <tr>
+            <td><input type="checkbox" name="selected_repairs[]" value="<?php echo $row['id']; ?>" class="repair-checkbox"></td>
+            <td><?php echo $row['repair_type']; ?></td>
+            <td><?php echo $row['description']; ?></td>
+            <td><?php echo $row['status']; ?></td>
+            <td><?php echo $row['vehicle_type'] . ' ' . $row['brand'] . ' ' . $row['model'] . ' (' . $row['license_plate'] . ')'; ?></td>
+            <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
+            <td><?php echo $row['email']; ?></td>
+            <td><?php echo $row['start_date']; ?></td>
+            <td><?php echo $row['end_date']; ?></td>
+            <td>
+              <a href="update.php?id=<?php echo $row['id']; ?>">Edit</a> |
+              <a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
+            </td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+
+    <br>
+    <button type="submit">Delete Selected Repairs</button>
+  </form>
 </body>
 
 </html>
