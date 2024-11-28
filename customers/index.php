@@ -15,9 +15,10 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-  <h1>Customer List</h1>
-
-  <a href="create.php">Add New Customer</a>
+  <div>
+    <h1>Customer List</h1>
+    <a href="create.php">Add New Customer</a>
+  </div>
   <table border="1">
     <thead>
       <tr>
