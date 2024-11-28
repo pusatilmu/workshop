@@ -23,7 +23,7 @@ $result = $conn->query($sql);
 <body>
   <h1>Payments List</h1>
 
-  <a href="create.php">Add New Payment</a><br><br>
+  <a href="create.php">Add New Payment</a>
 
   <table border="1">
     <thead>
