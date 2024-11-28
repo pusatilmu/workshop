@@ -20,8 +20,6 @@ $result = $conn->query($sql);
   <h1>Vehicle List</h1>
 
   <a href="create.php">Add New Vehicle</a>
-
-  <h2>Existing Vehicles</h2>
   <table border="1">
     <thead>
       <tr>
@@ -55,7 +53,6 @@ $result = $conn->query($sql);
       <?php } ?>
     </tbody>
   </table>
-
 </body>
 
 </html>
