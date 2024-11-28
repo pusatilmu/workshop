@@ -17,9 +17,10 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-  <h1>Vehicle List</h1>
-
-  <a href="create.php">Add New Vehicle</a>
+  <div>
+    <h1>Vehicle List</h1>
+    <a href="create.php">Add New Vehicle</a>
+  </div>
   <table border="1">
     <thead>
       <tr>
