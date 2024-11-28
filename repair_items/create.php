@@ -3,6 +3,7 @@ include('../config/database.php');
 
 // Handle form submission to create a new repair item
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // Mengambil data dari form
   $repair_id = $_POST['repair_id'];
   $part_name = $_POST['part_name'];
   $quantity = $_POST['quantity'];
@@ -21,6 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Error: " . $conn->error; // Display error if query fails
   }
 }
+
+// Fetch available repair IDs from the repairs table
+$repairQuery = "SELECT * FROM repairs";
+$repairResult = $conn->query($repairQuery);
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +42,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <form action="create.php" method="POST">
     <div>
       <label for="repair_id">Repair ID</label>
-      <input type="number" name="repair_id" id="repair_id" placeholder="Repair ID" required>
+      <select name="repair_id" id="repair_id" required>
+        <option value="">Select Repair ID</option>
+        <?php
+        if ($repairResult->num_rows > 0) {
+          while ($row = $repairResult->fetch_assoc()) {
+            echo "<option value='" . $row['id'] . "'>" . $row['repair_type'] . "</option>";
+          }
+        } else {
+          echo "<option value=''>No repairs found</option>";
+        }
+        ?>
+      </select>
     </div>
 
     <div>
