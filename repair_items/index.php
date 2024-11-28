@@ -32,7 +32,6 @@ $result = $conn->query($sql);
 
   <a href="create.php">Add New Repair Item</a>
 
-  <h2>Existing Repair Items</h2>
   <table border="1">
     <thead>
       <tr>
