@@ -1,48 +1,54 @@
 <?php
 include('../config/database.php');
 
-// Check if the employee ID is passed in the URL
+// Check if employee ID is provided in the URL
 if (isset($_GET['id'])) {
   $employee_id = $_GET['id'];
 
-  // Retrieve employee data from the database
+  // Retrieve employee data based on the ID to display it for updating
   $sql = "SELECT * FROM employees WHERE id = '$employee_id'";
   $result = $conn->query($sql);
 
+  // Check if the employee was found
   if ($result->num_rows > 0) {
-    // Fetch the employee data
     $employee = $result->fetch_assoc();
   } else {
-    echo "Employee not found!";
+    echo "Employee not found.";
     exit;
   }
-}
 
-// Handle form submission to update employee
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $first_name = $_POST['first_name'];
-  $last_name = $_POST['last_name'];
-  $role = $_POST['role'];
-  $phone = $_POST['phone'];
-  $email = $_POST['email'];
+  // Process the form submission for updating the employee data
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Collect form data
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $role = $_POST['role'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
 
-  // Update the employee data in the database
-  $sql = "UPDATE employees SET 
+    // SQL query to update the employee's data
+    $sql = "UPDATE employees SET 
                 first_name = '$first_name', 
                 last_name = '$last_name', 
                 role = '$role', 
                 phone = '$phone', 
                 email = '$email', 
                 updated_at = NOW() 
-            WHERE id = '$employee_id'";
+                WHERE id = '$employee_id'";
 
-  if ($conn->query($sql) === TRUE) {
-    header("Location: index.php"); // Redirect back to employee list after successful update
-    exit;
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    // Execute the update query
+    if ($conn->query($sql) === TRUE) {
+      header("Location: index.php"); // Redirect to the employee list page after successful update
+      exit;
+    } else {
+      echo "Error: " . $conn->error;
+    }
   }
+} else {
+  echo "No employee ID specified.";
+  exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -69,4 +75,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div>
       <label for="role">Role</label>
-      <input type="text" name="role" id
+      <input type="text" name="role" id="role" value="<?php echo htmlspecialchars($employee['role']); ?>" required>
+    </div>
+
+    <div>
+      <label for="phone">Phone</label>
+      <input type="text" name="phone" id="phone" value="<?php echo htmlspecialchars($employee['phone']); ?>" required>
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($employee['email']); ?>" required>
+    </div>
+
+    <button type="submit">Update Employee</button>
+  </form>
+
+  <br>
+  <a href="index.php">Back to Employee List</a>
+</body>
+
+</html>
+
+<?php
+$conn->close();
+?>
