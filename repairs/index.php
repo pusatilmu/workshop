@@ -32,7 +32,7 @@ $result = $conn->query($sql);
   <div>
     <h1>Repairs List</h1>
 
-    <a href="create.php">Add New Repair</a><br><br>
+    <a href="create.php">Add New Repair</a>
   </div>
 
   <table border="1">
