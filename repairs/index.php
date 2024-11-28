@@ -17,14 +17,15 @@ $result = $conn->query($sql);
 
 <head>
   <meta charset="UTF-8">
-  <title>Payments List</title>
+  <title>Repairs List</title>
 </head>
 
 <body>
-  <h1>Payments List</h1>
+  <div>
+    <h1>Repairs List</h1>
 
-  <a href="create.php">Add New Payment</a><br><br>
-
+    <a href="create.php">Add New Repair</a><br><br>
+  </div>
   <table border="1">
     <thead>
       <tr>
