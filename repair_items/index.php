@@ -28,10 +28,10 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-  <h1>Repair Items List</h1>
-
-  <a href="create.php">Add New Repair Item</a>
-
+  <div>
+    <h1>Repair Items List</h1>
+    <a href="create.php">Add New Repair Item</a>
+  </div>
   <table border="1">
     <thead>
       <tr>
