@@ -34,8 +34,6 @@ Berikut adalah fitur-fitur utama dari aplikasi ini:
    - **Deskripsi**: Fitur untuk mengelola data kendaraan, terutama kendaraan yang perlu perbaikan atau perawatan.
    - **Fungsi**: Menambah, mengedit, menghapus, dan menampilkan informasi kendaraan.
 
-## Skrip Automasi Git
-
 ### 1. **`branch.sh`**
    - **Deskripsi**: Skrip shell untuk mengelola cabang (branch) di dalam sistem kontrol versi Git.
    - **Fungsi**: Membantu dalam pembuatan, penggabungan (merge), atau pengelolaan cabang dalam proyek secara otomatis.
