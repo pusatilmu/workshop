@@ -30,7 +30,6 @@ $result = $conn->query($sql);
 
   <a href="create.php">Assign Repair to Employee</a>
 
-  <h2>Existing Repair Assignments</h2>
   <table border="1">
     <thead>
       <tr>
