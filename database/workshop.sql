@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Nov 2024 pada 07.36
+-- Waktu pembuatan: 28 Nov 2024 pada 13.11
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -38,17 +38,6 @@ CREATE TABLE `customers` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `customers`
---
-
-INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, 'John', 'Doe', 'john.doe@example.com', '081234567890', '123 Main Street, City', '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(2, 'Jane', 'Smith', 'jane.smith@example.com', '082345678901', '456 Oak Avenue, City', '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(3, 'Chris', 'Johnson', 'chris.johnson@example.com', '083456789012', '789 Pine Road, City', '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(4, 'Emily', 'Williams', 'emily.williams@example.com', '084567890123', '321 Birch Street, City', '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(5, 'Michael', 'Brown', 'michael.brown@example.com', '085678901234', '654 Cedar Lane, City', '2024-11-28 06:18:30', '2024-11-28 06:18:30');
-
 -- --------------------------------------------------------
 
 --
@@ -67,17 +56,6 @@ CREATE TABLE `employees` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `employees`
---
-
-INSERT INTO `employees` (`id`, `first_name`, `last_name`, `role`, `phone`, `email`, `hire_date`, `created_at`, `updated_at`) VALUES
-(1, 'John', 'Doe', 'Technician', '081234567890', 'john.doe@example.com', '2024-11-28 06:18:30', '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(2, 'Jane', 'Smith', 'Manager', '082345678901', 'jane.smith@example.com', '2024-11-28 06:18:30', '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(3, 'Chris', 'Johnson', 'Mechanic', '083456789012', 'chris.johnson@example.com', '2024-11-28 06:18:30', '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(4, 'Emily', 'Williams', 'Technician', '084567890123', 'emily.williams@example.com', '2024-11-28 06:18:30', '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(5, 'Michael', 'Brown', 'Mechanic', '085678901234', 'michael.brown@example.com', '2024-11-28 06:18:30', '2024-11-28 06:18:30', '2024-11-28 06:18:30');
-
 -- --------------------------------------------------------
 
 --
@@ -92,17 +70,6 @@ CREATE TABLE `payments` (
   `payment_method` varchar(50) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `payments`
---
-
-INSERT INTO `payments` (`id`, `repair_id`, `payment_date`, `amount`, `payment_method`, `status`) VALUES
-(1, 1, '2024-11-28 07:00:00', 500.00, 'Credit', 'Paid'),
-(2, 2, '2024-11-29 03:30:00', 300.00, 'Cash', 'Paid'),
-(3, 3, '2024-11-30 02:15:00', 200.00, 'Bank Transfer', 'Pending'),
-(4, 4, '2024-12-01 06:00:00', 150.00, 'Cash', 'Paid'),
-(5, 5, '2024-12-02 09:45:00', 400.00, 'Credit', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -122,17 +89,6 @@ CREATE TABLE `repairs` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `repairs`
---
-
-INSERT INTO `repairs` (`id`, `vehicle_id`, `repair_type`, `description`, `status`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Engine Repair', 'Replace engine components', 'Pending', '2024-11-28', NULL, '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(2, 2, 'Transmission Repair', 'Fix transmission issues', 'In Progress', '2024-11-28', NULL, '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(3, 3, 'Suspension Repair', 'Replace suspension parts', 'Completed', '2024-11-28', NULL, '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(4, 4, 'Brake Repair', 'Replace brake pads and rotors', 'Pending', '2024-11-28', NULL, '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(5, 5, 'Electrical Repair', 'Fix electrical wiring issues', 'In Progress', '2024-11-28', NULL, '2024-11-28 06:18:30', '2024-11-28 06:18:30');
-
 -- --------------------------------------------------------
 
 --
@@ -143,17 +99,6 @@ CREATE TABLE `repair_assignments` (
   `repair_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `repair_assignments`
---
-
-INSERT INTO `repair_assignments` (`repair_id`, `employee_id`) VALUES
-(1, 2),
-(2, 3),
-(3, 4),
-(4, 5),
-(5, 2);
 
 -- --------------------------------------------------------
 
@@ -170,16 +115,19 @@ CREATE TABLE `repair_items` (
   `total_price` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `repair_items`
+-- Struktur dari tabel `users`
 --
 
-INSERT INTO `repair_items` (`id`, `repair_id`, `part_name`, `quantity`, `price`, `total_price`) VALUES
-(1, 1, 'Engine Block', 1, 500.00, 500.00),
-(2, 2, 'Transmission Gasket', 2, 50.00, 100.00),
-(3, 3, 'Shock Absorber', 4, 120.00, 480.00),
-(4, 4, 'Brake Pads', 2, 60.00, 120.00),
-(5, 5, 'Wiring Harness', 1, 200.00, 200.00);
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -198,17 +146,6 @@ CREATE TABLE `vehicles` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `vehicles`
---
-
-INSERT INTO `vehicles` (`id`, `customer_id`, `vehicle_type`, `brand`, `model`, `license_plate`, `year`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Car', 'Toyota', 'Corolla', 'AB123CD', 2020, '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(2, 2, 'Motorcycle', 'Honda', 'CBR500R', 'BC456EF', 2021, '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(3, 3, 'Car', 'BMW', 'X5', 'DE789GH', 2022, '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(4, 4, 'Truck', 'Ford', 'F-150', 'FG123HI', 2021, '2024-11-28 06:18:30', '2024-11-28 06:18:30'),
-(5, 5, 'Car', 'Tesla', 'Model 3', 'JK456LM', 2023, '2024-11-28 06:18:30', '2024-11-28 06:18:30');
 
 --
 -- Indexes for dumped tables
@@ -255,6 +192,13 @@ ALTER TABLE `repair_items`
   ADD KEY `repair_id` (`repair_id`);
 
 --
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- Indeks untuk tabel `vehicles`
 --
 ALTER TABLE `vehicles`
@@ -269,37 +213,43 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT untuk tabel `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `repairs`
 --
 ALTER TABLE `repairs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `repair_items`
 --
 ALTER TABLE `repair_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
