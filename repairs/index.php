@@ -31,7 +31,6 @@ $result = $conn->query($sql);
 <body>
   <div>
     <h1>Repairs List</h1>
-
     <a href="create.php">Add New Repair</a>
   </div>
 
