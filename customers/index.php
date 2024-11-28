@@ -18,8 +18,6 @@ $result = $conn->query($sql);
   <h1>Customer List</h1>
 
   <a href="create.php">Add New Customer</a>
-
-  <h2>Existing Customers</h2>
   <table border="1">
     <thead>
       <tr>
