@@ -1,8 +1,19 @@
 <?php
 include('../config/database.php');
 
-// Fetch all repair assignments
-$sql = "SELECT * FROM repair_assignments";
+// Query untuk mendapatkan data repair assignments dengan JOIN
+$sql = "SELECT 
+            ra.repair_id, 
+            ra.employee_id, 
+            r.repair_type, 
+            CONCAT(e.first_name, ' ', e.last_name) AS employee_name
+        FROM 
+            repair_assignments ra
+        JOIN 
+            repairs r ON ra.repair_id = r.id
+        JOIN 
+            employees e ON ra.employee_id = e.id";
+
 $result = $conn->query($sql);
 ?>
 
@@ -23,19 +34,19 @@ $result = $conn->query($sql);
   <table border="1">
     <thead>
       <tr>
-        <th>Repair ID</th>
-        <th>Employee ID</th>
+        <th>Repair Type</th>
+        <th>Employee Name</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <?php while ($row = $result->fetch_assoc()) { ?>
         <tr>
-          <td><?php echo $row['repair_id']; ?></td>
-          <td><?php echo $row['employee_id']; ?></td>
+          <td><?php echo $row['repair_type']; ?></td>
+          <td><?php echo $row['employee_name']; ?></td>
           <td>
-            <a href="update.php?id=<?php echo $row['repair_id']; ?>&employee_id=<?php echo $row['employee_id']; ?>">Edit</a> |
-            <a href="delete.php?id=<?php echo $row['repair_id']; ?>&employee_id=<?php echo $row['employee_id']; ?>" onclick="return confirm('Are you sure you want to delete this assignment?');">Delete</a>
+            <a href="update.php?repair_id=<?php echo $row['repair_id']; ?>">Edit</a> |
+            <a href="delete.php?repair_id=<?php echo $row['repair_id']; ?>" onclick="return confirm('Are you sure you want to delete this assignment?');">Delete</a>
           </td>
         </tr>
       <?php } ?>
