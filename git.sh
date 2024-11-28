@@ -48,3 +48,7 @@ else
 
     echo "Perubahan telah di-commit dan dipush ke repository dengan pesan: $COMMIT_MESSAGE"
 fi
+
+# Menunggu input pengguna sebelum menutup terminal
+echo "Tekan Enter untuk keluar..."
+read
