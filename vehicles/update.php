@@ -18,8 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $license_plate = $_POST['license_plate'];
   $year = $_POST['year'];
 
+  // Update the vehicle record in the database
   $sql = "UPDATE vehicles SET customer_id = '$customer_id', vehicle_type = '$vehicle_type', 
-          brand = '$brand', model = '$model', license_plate = '$license_plate', year = '$year', updated_at = NOW() WHERE id = $id";
+          brand = '$brand', model = '$model', license_plate = '$license_plate', year = '$year', updated_at = NOW() 
+          WHERE id = $id";
 
   if ($conn->query($sql) === TRUE) {
     header("Location: index.php"); // Redirect to the list after successful update
@@ -41,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
   <h1>Edit Vehicle</h1>
 
+  <!-- Form to edit vehicle -->
   <form action="update.php?id=<?php echo $vehicle['id']; ?>" method="POST">
     <input type="number" name="customer_id" value="<?php echo $vehicle['customer_id']; ?>" placeholder="Customer ID" required>
     <input type="text" name="vehicle_type" value="<?php echo $vehicle['vehicle_type']; ?>" placeholder="Vehicle Type" required>

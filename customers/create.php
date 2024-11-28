@@ -33,11 +33,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <h1>Add New Customer</h1>
 
   <form action="create.php" method="POST">
-    <input type="text" name="first_name" placeholder="First Name" required>
-    <input type="text" name="last_name" placeholder="Last Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="text" name="phone" placeholder="Phone" required>
-    <textarea name="address" placeholder="Address" required></textarea>
+    <div>
+      <label for="first_name">First Name</label>
+      <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+    </div>
+
+    <div>
+      <label for="last_name">Last Name</label>
+      <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+    </div>
+
+    <div>
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" placeholder="Phone" required>
+    </div>
+
+    <div>
+      <label for="address">Address</label>
+      <textarea id="address" name="address" placeholder="Address" required></textarea>
+    </div>
+
     <button type="submit">Add Customer</button>
   </form>
 

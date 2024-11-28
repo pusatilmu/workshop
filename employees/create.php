@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $phone = $_POST['phone'];
   $email = $_POST['email'];
 
+  // Insert employee data into the database
   $sql = "INSERT INTO employees (first_name, last_name, role, phone, email, hire_date, created_at, updated_at) 
           VALUES ('$first_name', '$last_name', '$role', '$phone', '$email', NOW(), NOW(), NOW())";
 
@@ -33,11 +34,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <h1>Add New Employee</h1>
 
   <form action="create.php" method="POST">
-    <input type="text" name="first_name" placeholder="First Name" required>
-    <input type="text" name="last_name" placeholder="Last Name" required>
-    <input type="text" name="role" placeholder="Role" required>
-    <input type="text" name="phone" placeholder="Phone" required>
-    <input type="email" name="email" placeholder="Email" required>
+    <div>
+      <label for="first_name">First Name</label>
+      <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+    </div>
+
+    <div>
+      <label for="last_name">Last Name</label>
+      <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+    </div>
+
+    <div>
+      <label for="role">Role</label>
+      <input type="text" name="role" id="role" placeholder="Role" required>
+    </div>
+
+    <div>
+      <label for="phone">Phone</label>
+      <input type="text" name="phone" id="phone" placeholder="Phone" required>
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Email" required>
+    </div>
+
     <button type="submit">Add Employee</button>
   </form>
 

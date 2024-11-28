@@ -1,12 +1,21 @@
 <?php
 include('../config/database.php');
 
-// Fetch existing employee data to pre-fill the form
+// Check if the employee ID is passed in the URL
 if (isset($_GET['id'])) {
-  $id = $_GET['id'];
-  $sql = "SELECT * FROM employees WHERE id = $id";
+  $employee_id = $_GET['id'];
+
+  // Retrieve employee data from the database
+  $sql = "SELECT * FROM employees WHERE id = '$employee_id'";
   $result = $conn->query($sql);
-  $employee = $result->fetch_assoc();
+
+  if ($result->num_rows > 0) {
+    // Fetch the employee data
+    $employee = $result->fetch_assoc();
+  } else {
+    echo "Employee not found!";
+    exit;
+  }
 }
 
 // Handle form submission to update employee
@@ -17,11 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $phone = $_POST['phone'];
   $email = $_POST['email'];
 
-  $sql = "UPDATE employees SET first_name = '$first_name', last_name = '$last_name', role = '$role',
-          phone = '$phone', email = '$email', updated_at = NOW() WHERE id = $id";
+  // Update the employee data in the database
+  $sql = "UPDATE employees SET 
+                first_name = '$first_name', 
+                last_name = '$last_name', 
+                role = '$role', 
+                phone = '$phone', 
+                email = '$email', 
+                updated_at = NOW() 
+            WHERE id = '$employee_id'";
 
   if ($conn->query($sql) === TRUE) {
-    header("Location: index.php"); // Redirect to employee list after successful update
+    header("Location: index.php"); // Redirect back to employee list after successful update
     exit;
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
@@ -40,21 +56,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
   <h1>Update Employee</h1>
 
-  <form action="update.php?id=<?php echo $employee['id']; ?>" method="POST">
-    <input type="text" name="first_name" value="<?php echo $employee['first_name']; ?>" required>
-    <input type="text" name="last_name" value="<?php echo $employee['last_name']; ?>" required>
-    <input type="text" name="role" value="<?php echo $employee['role']; ?>" required>
-    <input type="text" name="phone" value="<?php echo $employee['phone']; ?>" required>
-    <input type="email" name="email" value="<?php echo $employee['email']; ?>" required>
-    <button type="submit">Update Employee</button>
-  </form>
+  <form action="update.php?id=<?php echo $employee_id; ?>" method="POST">
+    <div>
+      <label for="first_name">First Name</label>
+      <input type="text" name="first_name" id="first_name" value="<?php echo htmlspecialchars($employee['first_name']); ?>" required>
+    </div>
 
-  <br>
-  <a href="index.php">Back to Employee List</a>
-</body>
+    <div>
+      <label for="last_name">Last Name</label>
+      <input type="text" name="last_name" id="last_name" value="<?php echo htmlspecialchars($employee['last_name']); ?>" required>
+    </div>
 
-</html>
-
-<?php
-$conn->close();
-?>
+    <div>
+      <label for="role">Role</label>
+      <input type="text" name="role" id

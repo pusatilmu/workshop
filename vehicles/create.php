@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $license_plate = $_POST['license_plate'];
   $year = $_POST['year'];
 
+  // Simple SQL query (no SQL injection protection in this version)
   $sql = "INSERT INTO vehicles (customer_id, vehicle_type, brand, model, license_plate, year, created_at, updated_at) 
           VALUES ('$customer_id', '$vehicle_type', '$brand', '$model', '$license_plate', '$year', NOW(), NOW())";
 
@@ -33,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
   <h1>Add New Vehicle</h1>
 
+  <!-- Form for adding a new vehicle -->
   <form action="create.php" method="POST">
     <input type="number" name="customer_id" placeholder="Customer ID" required>
     <input type="text" name="vehicle_type" placeholder="Vehicle Type" required>
