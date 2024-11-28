@@ -35,47 +35,41 @@ $result = $conn->query($sql);
     <a href="create.php">Add New Repair</a><br><br>
   </div>
 
-  <!-- Form to handle batch deletion -->
-  <form action="delete_selected.php" method="POST">
-    <table border="1">
-      <thead>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Repair Type</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Vehicle</th>
+        <th>Customer Name</th>
+        <th>Customer Email</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php while ($row = $result->fetch_assoc()) { ?>
         <tr>
-          <th><input type="checkbox" onclick="toggleSelectAll(this)"></th>
-          <th>Repair Type</th>
-          <th>Description</th>
-          <th>Status</th>
-          <th>Vehicle</th>
-          <th>Customer Name</th>
-          <th>Customer Email</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Actions</th>
+          <td><input type="checkbox" name="selected_repairs[]" value="<?php echo $row['id']; ?>" class="repair-checkbox"></td>
+          <td><?php echo $row['repair_type']; ?></td>
+          <td><?php echo $row['description']; ?></td>
+          <td><?php echo $row['status']; ?></td>
+          <td><?php echo $row['vehicle_type'] . ' ' . $row['brand'] . ' ' . $row['model'] . ' (' . $row['license_plate'] . ')'; ?></td>
+          <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
+          <td><?php echo $row['email']; ?></td>
+          <td><?php echo $row['start_date']; ?></td>
+          <td><?php echo $row['end_date']; ?></td>
+          <td>
+            <a href="update.php?id=<?php echo $row['id']; ?>">Edit</a> |
+            <a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <?php while ($row = $result->fetch_assoc()) { ?>
-          <tr>
-            <td><input type="checkbox" name="selected_repairs[]" value="<?php echo $row['id']; ?>" class="repair-checkbox"></td>
-            <td><?php echo $row['repair_type']; ?></td>
-            <td><?php echo $row['description']; ?></td>
-            <td><?php echo $row['status']; ?></td>
-            <td><?php echo $row['vehicle_type'] . ' ' . $row['brand'] . ' ' . $row['model'] . ' (' . $row['license_plate'] . ')'; ?></td>
-            <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
-            <td><?php echo $row['email']; ?></td>
-            <td><?php echo $row['start_date']; ?></td>
-            <td><?php echo $row['end_date']; ?></td>
-            <td>
-              <a href="update.php?id=<?php echo $row['id']; ?>">Edit</a> |
-              <a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
-            </td>
-          </tr>
-        <?php } ?>
-      </tbody>
-    </table>
+      <?php } ?>
+    </tbody>
+  </table>
 
-    <br>
-    <button type="submit">Delete Selected Repairs</button>
-  </form>
 </body>
 
 </html>
